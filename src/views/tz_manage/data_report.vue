@@ -14,13 +14,13 @@
         </div>
         <div class="table-container">
             <el-table :data="list" border style="width: 950px;margin:0 auto;">
-                <el-table-column prop="chujia" label="出价" width="200"></el-table-column>
-                <el-table-column prop="avg" label="平均点击成本" width="200"></el-table-column>
-                <el-table-column prop="clickRate" label="点击率" width="200"></el-table-column>
-                <el-table-column prop="clickTimes" label="点击次数" width="200"></el-table-column>
-                <el-table-column prop="createDate" label="日期" width="200"></el-table-column>
-                <el-table-column prop="showTimes" label="曝光次数" width="200"></el-table-column>
-                <el-table-column prop="xiaofei" label="消费金额" width="200"></el-table-column>
+                <el-table-column prop="createDate" label="日期" width="150"></el-table-column>
+                <el-table-column prop="xiaofei" label="消费金额" width="100"></el-table-column>
+                <el-table-column prop="chujia" label="出价" width="100"></el-table-column>
+                <el-table-column prop="showTimes" label="展示量" width="100"></el-table-column>
+                <el-table-column prop="clickTimes" label="点击次数" width="100"></el-table-column>
+                <el-table-column prop="clickRate" label="点击率" width="100"></el-table-column>
+                <el-table-column prop="avg" label="平均点击成本(元)" width="180"></el-table-column>
                 <el-table-column fixed="right" label="操作" width="100">
                     <template slot-scope="scope">
                         <el-button type="text" @click="edit_form_show(scope.row)" size="small">编辑</el-button>
@@ -52,32 +52,32 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="日期" :label-width="'100px'">
+                    <el-date-picker
+                            v-model="form.createDate"
+                            type="datetime"
+                            value-format="yyyy-MM-dd"
+                            format="yyyy-MM-dd"
+                            placeholder="选择日期时间">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="消费金额" :label-width="'100px'">
+                    <el-input v-model="form.xiaofei" autocomplete="off" :style="{width:'200px'}"></el-input>
+                </el-form-item>
                 <el-form-item label="出价" :label-width="'100px'">
                     <el-input v-model="form.chujia" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="平均点击成本" :label-width="'100px'">
-                    <el-input v-model="form.avg" autocomplete="off" :style="{width:'200px'}"></el-input>
-                </el-form-item>
-                <el-form-item label="点击率" :label-width="'100px'">
-                    <el-input v-model="form.clickRate" autocomplete="off" :style="{width:'200px'}"></el-input>
+                <el-form-item label="展示量" :label-width="'100px'">
+                    <el-input v-model="form.showTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
                 <el-form-item label="点击次数" :label-width="'100px'">
                     <el-input v-model="form.clickTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="日期" :label-width="'100px'">
-                    <el-date-picker
-                        v-model="form.createDate"
-                        type="datetime"
-                        value-format="yyyy-MM-dd"
-                        format="yyyy-MM-dd"
-                        placeholder="选择日期时间">
-                    </el-date-picker>
+                <el-form-item label="点击率" :label-width="'100px'">
+                    <el-input v-model="form.clickRate" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="曝光次数" :label-width="'100px'">
-                    <el-input v-model="form.showTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
-                </el-form-item>
-                <el-form-item label="消费金额" :label-width="'100px'">
-                    <el-input v-model="form.xiaofei" autocomplete="off" :style="{width:'200px'}"></el-input>
+                <el-form-item label="平均点击成本" :label-width="'100px'">
+                    <el-input v-model="form.avg" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -97,32 +97,32 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="日期" :label-width="'100px'">
+                    <el-date-picker
+                            v-model="form.createDate"
+                            type="datetime"
+                            value-format="yyyy-MM-dd"
+                            format="yyyy-MM-dd"
+                            placeholder="选择日期时间">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="消费金额" :label-width="'100px'">
+                    <el-input v-model="form.xiaofei" autocomplete="off" :style="{width:'200px'}"></el-input>
+                </el-form-item>
                 <el-form-item label="出价" :label-width="'100px'">
                     <el-input v-model="form.chujia" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="平均点击成本" :label-width="'100px'">
-                    <el-input v-model="form.avg" autocomplete="off" :style="{width:'200px'}"></el-input>
-                </el-form-item>
-                <el-form-item label="点击率" :label-width="'100px'">
-                    <el-input v-model="form.clickRate" autocomplete="off" :style="{width:'200px'}"></el-input>
+                <el-form-item label="展示量" :label-width="'100px'">
+                    <el-input v-model="form.showTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
                 <el-form-item label="点击次数" :label-width="'100px'">
                     <el-input v-model="form.clickTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="日期" :label-width="'100px'">
-                    <el-date-picker
-                        v-model="form.createDate"
-                        type="datetime"
-                        value-format="yyyy-MM-dd"
-                        format="yyyy-MM-dd"
-                        placeholder="选择日期时间">
-                    </el-date-picker>
+                <el-form-item label="点击率" :label-width="'100px'">
+                    <el-input v-model="form.clickRate" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="曝光次数" :label-width="'100px'">
-                    <el-input v-model="form.showTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
-                </el-form-item>
-                <el-form-item label="消费金额" :label-width="'100px'">
-                    <el-input v-model="form.xiaofei" autocomplete="off" :style="{width:'200px'}"></el-input>
+                <el-form-item label="平均点击成本" :label-width="'100px'">
+                    <el-input v-model="form.avg" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
