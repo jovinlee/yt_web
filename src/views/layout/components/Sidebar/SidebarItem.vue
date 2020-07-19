@@ -35,6 +35,9 @@
 <script>
   export default {
     name: 'SidebarItem',
+    created:function(){
+      console.log(this.routes);
+    },
     props: {
       routes: {
         type: Array

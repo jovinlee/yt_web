@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/statement":{
-        target:"http://172.28.1.19:8383",
+        target:"http://47.107.139.155:8383",
         //target:"http://47.107.139.155:8100",
         //target:"http://1000mall.sysbase.dev.pp188.net",
         changeOrigin:true

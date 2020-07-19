@@ -219,6 +219,10 @@
                 this.form={};
                 this.dialogFormVisible_edit=false;
             },
+            edit_form_show:function(item){
+                this.form=Object.assign({},item);
+                this.dialogFormVisible_edit=true;
+            },
             add_submit:function(){
                 addBizData(this.form).then(res=>{
                     if(res.status==1){
@@ -238,6 +242,7 @@
                     if(res.status==1){
                         this.form={};
                         this.edit_form_hide();
+                        this.getBizDataList();
                     }else{
                         this.$message({
                         message: res.message,
