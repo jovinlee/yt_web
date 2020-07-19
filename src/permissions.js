@@ -94,34 +94,6 @@ module.exports = [
         ]
     },
     {
-        "id": "7",
-        "title": "用户管理",
-        "state": null,
-        "checked": false,
-        "meta": {
-            "icon": null,
-            "url": "/user_manage"
-        },
-        "parentId": "-1",
-        "hasParent": false,
-        "hasChildren": true,
-        "children": [
-            {
-                "id": "8",
-                "title": "用户管理",
-                "state": null,
-                "checked": false,
-                "meta": {
-                    "icon": null,
-                    "url": "index"
-                },
-                "parentId": "7",
-                "hasParent": true,
-                "hasChildren": false
-            }
-        ]
-    },
-    {
         "id": "9",
         "title": "消息中心",
         "state": null,
@@ -144,6 +116,34 @@ module.exports = [
                     "url": "msg_list"
                 },
                 "parentId": "9",
+                "hasParent": true,
+                "hasChildren": false
+            }
+        ]
+    },
+    {
+        "id": "7",
+        "title": "用户管理",
+        "state": null,
+        "checked": false,
+        "meta": {
+            "icon": null,
+            "url": "/user_manage"
+        },
+        "parentId": "-1",
+        "hasParent": false,
+        "hasChildren": true,
+        "children": [
+            {
+                "id": "8",
+                "title": "用户管理",
+                "state": null,
+                "checked": false,
+                "meta": {
+                    "icon": null,
+                    "url": "index"
+                },
+                "parentId": "7",
                 "hasParent": true,
                 "hasChildren": false
             }

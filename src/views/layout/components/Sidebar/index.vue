@@ -23,11 +23,10 @@ import menus from '@/permissions.js'
 
 export default {
   data() {
-    // if(this.$store.state.user.name!='admin'){
-    //   console.log(this.$store.state.user);
-    //   menus.splice(menus.length-1);
-    //   console.log(menus);
-    // }
+    if(this.$store.state.user.user.name!='admin'){
+      menus.pop();
+      console.log(menus);
+    }
     return {
       menus
     }
