@@ -72,23 +72,23 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/',
+    path: '/user_manage',
     component: Layout,
     children: [{
-      path: 'user_manage',
-      name: 'user_manage',
+      path: 'index',
+      name: 'index',
       component: () => import('@/views/user_manage/index'),
       meta: { title: '用户管理', icon: 'home' }
     }]
   },
   {
-    path: '/',
+    path: '/message',
     component: Layout,
     children: [{
-      path: '/msg_list',
+      path: 'msg_list',
       name: 'msg_list',
       component: () => import('@/views/message/msg_list'),
-      meta: { title: '用户管理', icon: 'home' }
+      meta: { title: '消息中心', icon: 'home' }
     }]
   },
   { path: '*', redirect: '/404', hidden: true }

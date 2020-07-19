@@ -11,7 +11,7 @@
         <div style="text-align: center">
           <svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
         </div>
-        <h2 class="login-title color-main">千集 1000 mall</h2>
+        <h2 class="login-title color-main">沿途管理系统</h2>
         <el-form-item prop="name">
           <el-input
             name="name"
