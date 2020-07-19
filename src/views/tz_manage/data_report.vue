@@ -1,7 +1,6 @@
 <template>
     <div class="app-container">
         <div class="block">
-            <span class="demonstration">日期</span>
             <el-date-picker
                 v-model="date"
                 type="daterange"

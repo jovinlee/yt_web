@@ -2,6 +2,7 @@
     <div class="app-container">
         <div class="block">
             <el-button @click="showDailog">新增用户</el-button>
+            <el-button @click="showDailog">上传表单文件</el-button>
         </div>
         <div class="table-container">
             <el-table :data="userList" border type='index' style="width: 910px;margin:0 auto;">

@@ -1,7 +1,6 @@
 <template>
     <div class="app-container">
         <div class="block">
-            <span class="demonstration">日期</span>
             <el-date-picker
                 v-model="date"
                 type="daterange"
@@ -11,15 +10,10 @@
             </el-date-picker>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 555px;margin:0 auto;">
+            <el-table :data="list" border style="width: 450px;margin:0 auto;">
                 <el-table-column fixed prop="createDate" label="日期" width="150"></el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="200"></el-table-column>
                 <el-table-column prop="xiaofei" label="消费" width="100"></el-table-column>
-                <el-table-column fixed="right" label="操作" width="100">
-                    <template slot-scope="scope">
-                        <el-button type="text" @click="edit_form_show(scope.row)" size="small">修改</el-button>
-                    </template>
-                </el-table-column>
             </el-table>
         </div>
     </div>
