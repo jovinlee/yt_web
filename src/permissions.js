@@ -60,7 +60,7 @@ module.exports = [
                     "icon": null,
                     "url": "recharge_record"
                 },
-                "parentId": "6",
+                "parentId": "4",
                 "hasParent": true,
                 "hasChildren": false
             },
@@ -73,7 +73,7 @@ module.exports = [
                     "icon": null,
                     "url": "consume_record"
                 },
-                "parentId": "6",
+                "parentId": "4",
                 "hasParent": true,
                 "hasChildren": false
             }
@@ -89,20 +89,50 @@ module.exports = [
             "url": "/user_manage"
         },
         "parentId": "-1",
-        "hasParent": true,
-        "hasChildren": false
+        "hasParent": false,
+        "hasChildren": true,
+        "children": [
+            {
+                "id": "8",
+                "title": "用户管理",
+                "state": null,
+                "checked": false,
+                "meta": {
+                    "icon": null,
+                    "url": "index"
+                },
+                "parentId": "7",
+                "hasParent": true,
+                "hasChildren": false
+            }
+        ]
     },
     {
-        "id": "8",
+        "id": "9",
         "title": "消息中心",
         "state": null,
         "checked": false,
         "meta": {
             "icon": null,
-            "url": "/msg_list"
+            "url": "/message"
         },
         "parentId": "-1",
-        "hasParent": true,
-        "hasChildren": false
+        "hasParent": false,
+        "hasChildren": true,
+        "children": [
+            {
+                "id": "10",
+                "title": "消息中心",
+                "state": null,
+                "checked": false,
+                "meta": {
+                    "icon": null,
+                    "url": "msg_list"
+                },
+                "parentId": "9",
+                "hasParent": true,
+                "hasChildren": false
+            }
+        ]
     }
 ]
