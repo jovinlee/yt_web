@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="block">
-            <el-button size="small" @click="add_form_show" >添加数据</el-button>
+            <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
         </div>
         <div class="table-container">
             <el-table :data="list" border style="width: 750px;margin:0 auto;">
