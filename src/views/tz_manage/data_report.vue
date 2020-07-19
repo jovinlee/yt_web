@@ -9,7 +9,7 @@
                 end-placeholder="结束日期">
             </el-date-picker>
             <el-button size="small">下载报告</el-button>
-            <el-button size="small" @click="add_form_show" >添加数据</el-button>
+            <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
         </div>
         <div class="table-container">
             <el-table :data="list" border style="width: 950px;margin:0 auto;">
