@@ -4,10 +4,24 @@ module.exports = [
         "title": "首页",
         "meta": {
             "icon": null,
-            "url": "/home"
+            "url": ""
         },
+        "parentId": "",
         "hasParent":false,
-        "hasChildren":false
+        "hasChildren":true,
+        "children":[
+            {
+                "id": "0",
+                "title": "首页",
+                "meta": {
+                    "icon": null,
+                    "url": "home"
+                },
+                "parentId": "-1",
+                "hasParent":true,
+                "hasChildren":false
+            },
+        ]
     },
     {
         "id": "2",
