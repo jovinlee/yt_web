@@ -8,7 +8,7 @@
                 start-placeholder="开始日期"
                 end-placeholder="结束日期">
             </el-date-picker>
-            <el-button size="small">下载报告</el-button>
+            <el-button v-if="show_down" @click="_getReport" size="small">下载报告</el-button>
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
         </div>
         <div class="table-container">
@@ -134,7 +134,7 @@
 <script>
     import moment from "moment";
     import {userList}  from '@/api/user';
-    import {updateBizData,bizDataList,addBizData} from '@/api/data_report'
+    import {updateBizData,bizDataList,addBizData,getReport} from '@/api/data_report'
     export default {
         data() {
             return {
@@ -175,6 +175,10 @@
                     return moment(date).format("YYYY-MM-DD");
                 }
                 
+            },
+            show_down:function(){
+                console.log(this.$store.state.user.user.showDown);
+                return this.$store.state.user.user.showDown==1;
             }
         },
         created() {
@@ -193,6 +197,10 @@
             }
         },
         methods: {
+            _getReport(){
+                window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
+                //getReport(params)
+            },
             getBizDataList(){
                 let params={
                     pageNum:this.pageNum,

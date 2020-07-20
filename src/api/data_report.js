@@ -21,3 +21,10 @@ export function updateBizData(form) {
       params: form
     })
 }
+export function getReport(form){
+  return request({
+    url: '/statement/yt/export',
+    method: 'GET',
+    params: form
+  })
+}
