@@ -17,7 +17,7 @@
         <div class="txt">投放概览</div>
         <div class="user-top">
             <div class="area">
-                <div class="top">暴光量</div>
+                <div class="top">曝光量</div>
                 <div class="bottom">123123</div>
             </div>
             <div class="area">
@@ -25,7 +25,7 @@
                 <div class="bottom">1111</div>
             </div>
             <div class="area">
-                <div class="top">点周率</div>
+                <div class="top">点击率</div>
                 <div class="bottom">123123123</div>
             </div>
             <div class="area">
