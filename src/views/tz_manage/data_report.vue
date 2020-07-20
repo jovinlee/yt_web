@@ -227,12 +227,6 @@
                     if(res.status==1){
                         this.form={};
                         this.add_form_hide();
-                    }else{
-                        this.$message({
-                        message: res.message,
-                        type: 'warning',
-                        duration:4000
-                        });
                     }
                 });
             },
@@ -242,12 +236,6 @@
                         this.form={};
                         this.edit_form_hide();
                         this.getBizDataList();
-                    }else{
-                        this.$message({
-                        message: res.message,
-                        type: 'warning',
-                        duration:4000
-                        });
                     }
                 });
             }

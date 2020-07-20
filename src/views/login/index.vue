@@ -123,8 +123,6 @@ export default {
               console.log(res);
               if(res.status==1){
                 this.$router.push({ path: "/" });
-              }else{
-                alert(res.message);
               }
             })
             .catch(() => {
