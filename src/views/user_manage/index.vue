@@ -17,8 +17,19 @@
                 </el-table-column>
                 <el-table-column fixed="right" label="操作" width="200">
                     <template slot-scope="scope">
-                        <!-- <el-button type="text" @click="deleteUser_show(scope.row)" size="small">删除</el-button> -->
-                        <el-button type="text" @click="showDailog_edit(scope.row)" size="small">修改</el-button>
+                        <div class="btns">
+                            <el-button type="primary" @click="showDailog_edit(scope.row)" size="small">修改</el-button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <el-upload
+                                :data="{userId:scope.row.rowId}"
+                                class="upload-demo"
+                                file="file"
+                                :on-change="upload"
+                                :show-file-list="false"
+                                action="/statement/yt/upload">
+                                <el-button size="small" type="primary">点击上传</el-button>
+                            </el-upload>
+                        </div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -186,11 +197,34 @@
                         }
                     })
                 })
+            },
+            upload(res){
+                console.log(res);
+                if(res.status=="success"){
+                    if(res.response.status==1){
+                        this.$message({
+                            type: 'success',
+                            message: '上传成功!'
+                        });
+                    }else{
+                        this.$message({
+                            type: 'error',
+                            message: res.response.message
+                        });
+                    }
+                }
             }
         }
     }
 </script>
+<style>
+  .el-upload-list{display: none}  
+</style>
 <style rel="stylesheet/scss" lang="scss" scoped>
+    .btns{
+        display: flex;
+        align-items: center;
+    }
 </style>
 
 
