@@ -2,7 +2,7 @@
   <div class="app-wrapper" :class="classObj">
     <div class="top-header">
       <div class="left">
-        <div class="logo">沿途传媒</div>
+        <div class="logo">沿途客户管理系统</div>
       </div>
       <div class="right">
         <div class="msg">
