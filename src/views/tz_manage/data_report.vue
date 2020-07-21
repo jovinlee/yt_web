@@ -137,6 +137,7 @@
     export default {
         data() {
             return {
+                data:{},
                 userList:[],
                 pageNum:1,
                 pageSize:10,

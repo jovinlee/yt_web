@@ -104,6 +104,7 @@
     export default {
         data() {
             return {
+                data:{},
                 userList:[],
                 pageNum:1,
                 pageSize:10,
@@ -141,7 +142,6 @@
         },
         created() {
             userList(0,1000).then((res)=>{
-                console.log(res);
                 if(res.status==1){
                     this.userList=res.data.records;
                 }
