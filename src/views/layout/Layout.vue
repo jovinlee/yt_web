@@ -2,14 +2,15 @@
   <div class="app-wrapper" :class="classObj">
     <div class="top-header">
       <div class="left">
+        <!--<img src="../../assets/images/logo.png"></img>-->
         <div class="logo">沿途客户管理系统</div>
       </div>
       <div class="right">
-        <div class="msg">
+       <!-- <div class="msg">
           <i class="el-icon-message-solid"></i>
           <font>消息消息消息消息消息消息消息消息消息消息消息消息</font>
           <a href="#/message/msg_list">查看详情</a>
-        </div>
+        </div>-->
         &nbsp;&nbsp;&nbsp;&nbsp; {{this.$store.state.user.user.companyName}}&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button @click="login_out">退出登录</el-button>
       </div>
@@ -91,7 +92,9 @@ export default {
       .left{
         padding-left: 10px;
         .logo{
-          font-size: 15px;
+          padding-left: 50px;
+          font-size: 30px;
+          font-weight: 500;
         }
       }
       .right{
