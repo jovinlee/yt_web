@@ -8,8 +8,9 @@
                 start-placeholder="开始日期"
                 end-placeholder="结束日期">
             </el-date-picker>
-            <el-button v-if="show_down" @click="_getReport" size="small">下载报告</el-button>
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
+            <!--<el-button v-if="show_down" @click="_getReport" size="small">文件下载</el-button>-->
+            <el-button @click="_getReport" size="small">数据导出</el-button>
         </div>
         <div class="table-container">
             <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
@@ -198,8 +199,15 @@
         },
         methods: {
             _getReport(){
-                window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
-                //getReport(params)
+                var hours = new Date().getHours();
+                if(hours > 22 || hours < 10){
+                    this.$message({
+                        message: '系统维护请稍后再试!',
+                        type: 'warning'
+                    });
+                }else {
+                    window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
+                }
             },
             pageChange:function(pageNum){
                 this.pageNum=pageNum;
