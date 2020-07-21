@@ -5,7 +5,7 @@
             <el-button @click="showDailog">上传表单文件</el-button>
         </div>
         <div class="table-container">
-            <el-table :data="userList" border type='index' style="width: 910px;margin:0 auto;">
+            <el-table :data="userList" border type='index' style="width: 910px;margin:0 auto;"  v-loading="listLoading">
                 <el-table-column prop="rowId" label="用户ID" width="100"></el-table-column>
                 <el-table-column prop="name" label="用户名" width="200"></el-table-column>
                 <el-table-column prop="password" label="密码" width="100"></el-table-column>
@@ -106,6 +106,7 @@
                 data:{},
                 pageNum:1,
                 pageSize:10,
+                listLoading:true,
                 dialogFormVisible:false,
                 dialogFormVisible_edit:false,
                 reset:{
@@ -159,9 +160,10 @@
                 this.getUserList();
             },
             getUserList:function(){
-                console.log(1)
-                return userList(this.pageNum,this.pageSize).then(res=>{
-                    console.log(res);
+                this.listLoading = true;
+                return userList(this.pageNum, this.pageSize).then(res => {
+                    this.listLoading = false;
+
                     if(res.status==1){
                         this.data=res.data;
                         this.userList=res.data.records;

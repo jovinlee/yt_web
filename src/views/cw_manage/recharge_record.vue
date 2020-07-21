@@ -12,7 +12,7 @@
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'" >添加数据</el-button>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 450px;margin:0 auto;">
+            <el-table :data="list" border style="width: 450px;margin:0 auto;"  v-loading="listLoading">
                 <el-table-column prop="createDate" label="日期" width="150"> </el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="200"></el-table-column>
                 <el-table-column prop="addAmt" label="充值" width="100"></el-table-column>
@@ -109,6 +109,7 @@
                 userList:[],
                 pageNum:1,
                 pageSize:10,
+                listLoading: true,
                 date:[moment().day(-30).format('YYYY-MM-DD'),moment().format('YYYY-MM-DD')],
                 list:[],
                 reset:{},
@@ -151,6 +152,7 @@
         },
         methods: {
             getRechargeRecordList(){
+                this.listLoading = true;
                 let params={
                     pageNum:this.pageNum,
                     pageSize:this.pageSize,
@@ -159,6 +161,7 @@
                     userId:this.$store.state.user.user.rowId
                 }
                 rechargeRecordList(params).then((res)=>{
+                    this.listLoading = false;
                     if(res.status==1){
                         this.list=res.data.records;
                     }
