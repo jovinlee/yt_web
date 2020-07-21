@@ -2,14 +2,24 @@
   <div class="app-wrapper" :class="classObj">
     <div class="top-header">
       <div class="left">
+        <!--<img src="../../assets/images/logo.png"></img>-->
         <div class="logo">沿途客户管理系统</div>
       </div>
       <div class="right">
+<<<<<<< HEAD
         <div class="msg" v-if="lastMsg">
+=======
+       <!-- <div class="msg">
+>>>>>>> f2b1cd31001a998091ce29b8b0153864ebff6ae6
           <i class="el-icon-message-solid"></i>
           <font>{{lastMsg}}</font>
           <a href="#/message/msg_list">查看详情</a>
+<<<<<<< HEAD
         </div>
+=======
+        </div>-->
+        &nbsp;&nbsp;&nbsp;&nbsp; {{this.$store.state.user.user.companyName}}&nbsp;&nbsp;&nbsp;&nbsp;
+>>>>>>> f2b1cd31001a998091ce29b8b0153864ebff6ae6
         <el-button @click="login_out">退出登录</el-button>
       </div>
       
@@ -92,7 +102,9 @@ export default {
       .left{
         padding-left: 10px;
         .logo{
-          font-size: 15px;
+          padding-left: 50px;
+          font-size: 30px;
+          font-weight: 500;
         }
       }
       .right{

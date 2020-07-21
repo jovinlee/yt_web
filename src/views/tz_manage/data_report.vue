@@ -8,11 +8,12 @@
                 start-placeholder="开始日期"
                 end-placeholder="结束日期">
             </el-date-picker>
-            <el-button v-if="show_down" @click="_getReport" size="small">下载报告</el-button>
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
+            <!--<el-button v-if="show_down" @click="_getReport" size="small">文件下载</el-button>-->
+            <el-button @click="_getReport" size="small">数据导出</el-button>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 950px;margin:0 auto;"  v-loading="listLoading">
+            <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
                 <el-table-column prop="createDate" label="日期" width="150"></el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="150"></el-table-column>
                 <el-table-column prop="xiaofei" label="消费金额" width="100"></el-table-column>
@@ -20,7 +21,7 @@
                 <el-table-column prop="showTimes" label="展示量" width="100"></el-table-column>
                 <el-table-column prop="clickTimes" label="点击次数" width="100"></el-table-column>
                 <el-table-column prop="clickRate" label="点击率" width="100"></el-table-column>
-                <el-table-column prop="avg" label="平均点击成本(元)" width="150"></el-table-column>
+                <el-table-column prop="avg" label="平均点击成本(元)" width=""></el-table-column>
                 <el-table-column fixed="right" label="操作" width="100" v-if="$store.state.user.user.name == 'admin'">
                     <template slot-scope="scope">
                         <el-button type="text" @click="edit_form_show(scope.row)" size="small">编辑</el-button>
@@ -137,6 +138,7 @@
     export default {
         data() {
             return {
+                data:{},
                 userList:[],
                 pageNum:1,
                 pageSize:10,
@@ -197,8 +199,15 @@
         },
         methods: {
             _getReport(){
-                window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
-                //getReport(params)
+                var hours = new Date().getHours();
+                if(hours > 22 || hours < 10){
+                    this.$message({
+                        message: '系统维护请稍后再试!',
+                        type: 'warning'
+                    });
+                }else {
+                    window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
+                }
             },
             pageChange:function(pageNum){
                 this.pageNum=pageNum;
