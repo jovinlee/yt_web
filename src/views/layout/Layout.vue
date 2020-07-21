@@ -10,7 +10,7 @@
           <font>消息消息消息消息消息消息消息消息消息消息消息消息</font>
           <a href="#/message/msg_list">查看详情</a>
         </div>
-          {{this.$store.state.user.user.companyName}}
+        &nbsp;&nbsp;&nbsp;&nbsp; {{this.$store.state.user.user.companyName}}&nbsp;&nbsp;&nbsp;&nbsp;
         <el-button @click="login_out">退出登录</el-button>
       </div>
       
