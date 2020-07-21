@@ -4,7 +4,7 @@
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 100%;margin:0 auto;"  v-loading="listLoading">
+            <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
                 <el-table-column prop="info" label="信息" width="450"></el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="450"></el-table-column>
                 <el-table-column prop="createDate" label="日期"> </el-table-column>

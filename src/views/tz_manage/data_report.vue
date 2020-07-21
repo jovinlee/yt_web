@@ -12,7 +12,7 @@
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 950px;margin:0 auto;"  v-loading="listLoading">
+            <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
                 <el-table-column prop="createDate" label="日期" width="150"></el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="150"></el-table-column>
                 <el-table-column prop="xiaofei" label="消费金额" width="100"></el-table-column>
@@ -20,7 +20,7 @@
                 <el-table-column prop="showTimes" label="展示量" width="100"></el-table-column>
                 <el-table-column prop="clickTimes" label="点击次数" width="100"></el-table-column>
                 <el-table-column prop="clickRate" label="点击率" width="100"></el-table-column>
-                <el-table-column prop="avg" label="平均点击成本(元)" width="150"></el-table-column>
+                <el-table-column prop="avg" label="平均点击成本(元)" width=""></el-table-column>
                 <el-table-column fixed="right" label="操作" width="100" v-if="$store.state.user.user.name == 'admin'">
                     <template slot-scope="scope">
                         <el-button type="text" @click="edit_form_show(scope.row)" size="small">编辑</el-button>

@@ -10,10 +10,10 @@
             </el-date-picker>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 450px;margin:0 auto;"  v-loading="listLoading">
-                <el-table-column fixed prop="createDate" label="日期" width="150"></el-table-column>
-                <el-table-column prop="companyName" label="公司名称" width="200"></el-table-column>
-                <el-table-column prop="xiaofei" label="消费" width="100"></el-table-column>
+            <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
+                <el-table-column fixed prop="createDate" label="日期" width="400"></el-table-column>
+                <el-table-column prop="companyName" label="公司名称" width="400"></el-table-column>
+                <el-table-column prop="xiaofei" label="消费" width=""></el-table-column>
             </el-table>
             <el-pagination
                     style="width: 810px;margin:0 auto;"
