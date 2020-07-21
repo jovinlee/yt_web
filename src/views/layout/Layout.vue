@@ -6,23 +6,13 @@
         <div class="logo">沿途客户管理系统</div>
       </div>
       <div class="right">
-<<<<<<< HEAD
-        <div class="msg" v-if="lastMsg">
-=======
-       <!-- <div class="msg">
->>>>>>> f2b1cd31001a998091ce29b8b0153864ebff6ae6
+        <div class="msg" v-if="lastMsg" style="padding-right:20px;">
           <i class="el-icon-message-solid"></i>
           <font>{{lastMsg}}</font>
           <a href="#/message/msg_list">查看详情</a>
-<<<<<<< HEAD
         </div>
-=======
-        </div>-->
-        &nbsp;&nbsp;&nbsp;&nbsp; {{this.$store.state.user.user.companyName}}&nbsp;&nbsp;&nbsp;&nbsp;
->>>>>>> f2b1cd31001a998091ce29b8b0153864ebff6ae6
         <el-button @click="login_out">退出登录</el-button>
       </div>
-      
     </div>
     <sidebar class="sidebar-container"></sidebar>
     <div class="main-container">

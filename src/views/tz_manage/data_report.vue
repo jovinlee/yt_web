@@ -266,6 +266,7 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+    .block{padding-top: 20px;}
 </style>
 
 
