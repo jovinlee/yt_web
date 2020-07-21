@@ -8,9 +8,9 @@
         ref="loginForm"
         label-position="left"
       >
-        <div style="text-align: center">
-          <svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
-        </div>
+        <!--<div style="text-align: center">-->
+          <!--<svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>-->
+        <!--</div>-->
         <h2 class="login-title color-main">沿途管理系统</h2>
         <el-form-item prop="name">
           <el-input
@@ -145,7 +145,8 @@ export default {
   right: 0;
   width: 360px;
   margin: 140px auto;
-  border-top: 10px solid #409eff;
+  border-top: 10px;
+  /*border-top: 10px solid #409eff;*/
 }
 
 .login-title {

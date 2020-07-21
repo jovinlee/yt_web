@@ -50,14 +50,16 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss"  scoped>
+
 .app-container {
+    padding: 150px;
     .txt{
         padding:50px 0 10px;
         font-size: 20px;
     }
     .user-top{
         display: flex;
-        width:750px;
+        /*width:750px;*/
         .area{
             display: flex;
             flex-wrap: wrap;
