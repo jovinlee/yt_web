@@ -1,14 +1,19 @@
 import { login, logout, getInfo } from '@/api/login'
+import {getLastMsg} from "@/api/message"
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
-    user:{}
+    user:{},
+    lastMsg:""
   },
 
   mutations: {
     SET_USER_INFO: (state, user) => {
       state.user = user
+    },
+    SET_LAST_MSG:(state , lastMsg)=>{
+      state.lastMsg = lastMsg
     }
   },
 
@@ -22,6 +27,15 @@ const user = {
             const {data} = res;
             commit('SET_USER_INFO', data);
             sessionStorage.setItem("user",JSON.stringify(data));
+            var params={
+              userId:data.rowId
+            }
+            getLastMsg(params).then(res1=>{
+              if(res1.data){
+                commit("SET_LAST_MSG",res1.data.info);
+                sessionStorage.setItem("lastMsg",res1.data.info);
+              }
+            })
             resolve(res)
           }else{
             reject(res);

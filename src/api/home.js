@@ -1,20 +1,8 @@
 import request from '@/utils/request'
 
-export function getPlatInfo() {
+export function getHomeData(params) {
     return request({
-        url: '/plat/platInfo/myself',
-        method: 'get'
-    })
-}
-export function getHomeData() {
-    return request({
-        url: '/plat/platInfo/getHomeData',
-        method: 'get'
-    })
-}
-export function queryStatisticsData(params) {
-    return request({
-        url: '/plat/platInfo/queryStatisticsData',
+        url: '/statement/yt/currentBizData',
         method: 'get',
         params
     })

@@ -5,12 +5,11 @@
         <div class="logo">沿途客户管理系统</div>
       </div>
       <div class="right">
-        <div class="msg">
+        <div class="msg" v-if="lastMsg">
           <i class="el-icon-message-solid"></i>
-          <font>消息消息消息消息消息消息消息消息消息消息消息消息</font>
+          <font>{{lastMsg}}</font>
           <a href="#/message/msg_list">查看详情</a>
         </div>
-          {{this.$store.state.user.user.companyName}}
         <el-button @click="login_out">退出登录</el-button>
       </div>
       
@@ -41,6 +40,7 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
+    lastMsg(){return this.$store.state.user.lastMsg},
     sidebar() {
       return this.$store.state.app.sidebar
     },
@@ -58,6 +58,7 @@ export default {
   methods:{
     login_out(){
       window.sessionStorage.removeItem("user");
+      window.sessionStorage.removeItem("lastMsg");
       window.location.href="/"
     }
   }

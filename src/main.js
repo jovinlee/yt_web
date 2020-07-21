@@ -23,6 +23,8 @@ Vue.config.productionTip = false;
 var user=window.sessionStorage.getItem("user");
 if(user){
   store.commit('SET_USER_INFO', JSON.parse(user));
+  var lastMsg=window.sessionStorage.getItem("lastMsg");
+  store.commit('SET_LAST_MSG', lastMsg);
 }
 
 new Vue({

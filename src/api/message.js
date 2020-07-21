@@ -14,3 +14,10 @@ export function messageList(form) {
         params: form
     })
 }
+export function getLastMsg(form) {
+    return request({
+        url: '/statement/yt/lastmsg',
+        method: 'GET',
+        params: form
+    })
+}
