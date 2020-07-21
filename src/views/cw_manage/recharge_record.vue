@@ -22,19 +22,17 @@
                     </template>
                 </el-table-column>
             </el-table>
-        </div>
-        <!-- <div class="pagination-container">
             <el-pagination
+                    style="width: 810px;margin:0 auto;"
                     background
-                    @size-change=""
-                    @current-change=""
-                    layout="total, sizes,prev, pager, next,jumper"
-                    :page-size="data.pageSize"
-                    :page-sizes="[10,20,30]"
-                    :current-page.sync="data.pageNum"
-                    :total="total">
+                    @current-change="pageChange"
+                    layout="total,prev, next,jumper"
+                    :page-size="pageSize"
+                    :current-page.sync="pageNum"
+                    :total="data.total">
             </el-pagination>
-        </div> -->
+        </div>
+
         <el-dialog title="添加数据" :visible.sync="dialogFormVisible">
             <el-form :model="form" label-position="right" label-width="100px">
                 <el-form-item label="公司名称" :label-width="'100px'">
@@ -151,6 +149,10 @@
             this.getRechargeRecordList()
         },
         methods: {
+            pageChange:function(pageNum){
+                this.pageNum=pageNum;
+                this.getRechargeRecordList();
+            },
             getRechargeRecordList(){
                 this.listLoading = true;
                 let params={
@@ -163,6 +165,7 @@
                 rechargeRecordList(params).then((res)=>{
                     this.listLoading = false;
                     if(res.status==1){
+                        this.data=res.data;
                         this.list=res.data.records;
                     }
                 })

@@ -15,6 +15,15 @@
                 <el-table-column prop="companyName" label="公司名称" width="200"></el-table-column>
                 <el-table-column prop="xiaofei" label="消费" width="100"></el-table-column>
             </el-table>
+            <el-pagination
+                    style="width: 810px;margin:0 auto;"
+                    background
+                    @current-change="pageChange"
+                    layout="total,prev, next,jumper"
+                    :page-size="pageSize"
+                    :current-page.sync="pageNum"
+                    :total="data.total">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -73,6 +82,10 @@
             }
         },
         methods: {
+            pageChange:function(pageNum){
+                this.pageNum=pageNum;
+                this.getBizDataList();
+            },
             getBizDataList(){
                 this.listLoading = true;
                 let params={
@@ -85,6 +98,7 @@
                 bizDataList(params).then((res)=>{
                     this.listLoading = false;
                     if(res.status==1){
+                        this.data=res.data;
                         this.list=res.data.records;
                     }
                 })

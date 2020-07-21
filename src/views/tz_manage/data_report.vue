@@ -27,19 +27,17 @@
                     </template>
                 </el-table-column>
             </el-table>
-        </div>
-        <div class="pagination-container">
-            <!-- <el-pagination
+            <el-pagination
+                    style="width: 810px;margin:0 auto;"
                     background
-                    @size-change=""
-                    @current-change=""
-                    layout="total, sizes,prev, pager, next,jumper"
-                    :page-size="data.pageSize"
-                    :page-sizes="[10,20,30]"
-                    :current-page.sync="data.pageNum"
-                    :total="total">
-            </el-pagination> -->
+                    @current-change="pageChange"
+                    layout="total,prev, next,jumper"
+                    :page-size="pageSize"
+                    :current-page.sync="pageNum"
+                    :total="data.total">
+            </el-pagination>
         </div>
+
         <el-dialog title="添加数据" :visible.sync="dialogFormVisible">
             <el-form :model="form" :inline="true" label-position="right" label-width="100px">
                 <el-form-item label="公司名称" :label-width="'100px'">
@@ -202,6 +200,10 @@
                 window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
                 //getReport(params)
             },
+            pageChange:function(pageNum){
+                this.pageNum=pageNum;
+                this.getBizDataList();
+            },
             getBizDataList(){
                 this.listLoading = true;
                 let params={
@@ -214,6 +216,7 @@
                 bizDataList(params).then((res)=>{
                     this.listLoading = false;
                     if(res.status==1){
+                        this.data=res.data;
                         this.list=res.data.records;
                     }
                 })

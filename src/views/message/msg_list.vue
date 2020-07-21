@@ -4,24 +4,22 @@
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 750px;margin:0 auto;"  v-loading="listLoading">
+            <el-table :data="list" border style="width: 100%;margin:0 auto;"  v-loading="listLoading">
                 <el-table-column prop="info" label="信息" width="450"></el-table-column>
-                <el-table-column prop="companyName" label="公司名称" width="150"></el-table-column>
-                <el-table-column prop="createDate" label="日期" width="150"> </el-table-column>
+                <el-table-column prop="companyName" label="公司名称" width="450"></el-table-column>
+                <el-table-column prop="createDate" label="日期"> </el-table-column>
             </el-table>
-        </div>
-        <!-- <div class="pagination-container">
             <el-pagination
+                    style="width: 810px;margin:0 auto;"
                     background
-                    @size-change=""
-                    @current-change=""
-                    layout="total, sizes,prev, pager, next,jumper"
-                    :page-size="data.pageSize"
-                    :page-sizes="[10,20,30]"
-                    :current-page.sync="data.pageNum"
-                    :total="total">
+                    @current-change="pageChange"
+                    layout="total,prev, next,jumper"
+                    :page-size="pageSize"
+                    :current-page.sync="pageNum"
+                    :total="data.total">
             </el-pagination>
-        </div> -->
+        </div>
+
         <el-dialog title="添加数据" :visible.sync="dialogFormVisible">
             <el-form :model="form" label-position="right" label-width="100px">
                 <el-form-item label="公司名称" :label-width="'100px'">
@@ -99,7 +97,6 @@
         },
         created() {
             userList(0,1000).then((res)=>{
-                console.log(res);
             if(res.status==1){
                 this.userList=res.data.records;
             }
@@ -107,6 +104,10 @@
             this.getMessageList()
         },
         methods: {
+            pageChange:function(pageNum){
+                this.pageNum=pageNum;
+                this.getMessageList();
+            },
             getMessageList(){
                 this.listLoading = true;
                 let params={
@@ -117,8 +118,9 @@
                 messageList(params).then((res)=>{
                     this.listLoading = false;
                     if(res.status==1){
-                    this.list=res.data.records;
-                }
+                        this.data=res.data;
+                        this.list=res.data.records;
+                    }
             })
             },
             add_form_show:function(){
