@@ -28,3 +28,10 @@ export function getReport(form){
     params: form
   })
 }
+export function fileList(form){
+  return request({
+    url: '/statement/yt/fileList',
+    method: 'GET',
+    params: form
+  })
+}

@@ -10,11 +10,12 @@
             </el-date-picker>
             <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
             <!--<el-button v-if="show_down" @click="_getReport" size="small">文件下载</el-button>-->
-            <el-button @click="_getReport" size="small">数据导出</el-button>
+            <el-button @click="_getReport" size="small">导出数据</el-button>
+            <el-button v-if="$store.state.user.user.name != 'admin'" @click="openFilesDialog" size="small">下载文件</el-button>
         </div>
         <div class="table-container">
             <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
-                <el-table-column prop="createDate" label="日期" width="150"></el-table-column>
+                <el-table-column prop="createDate" label="日期" width="100"></el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="150"></el-table-column>
                 <el-table-column prop="xiaofei" label="消费金额" width="100"></el-table-column>
                 <el-table-column prop="chujia" label="出价(元)" width="100"></el-table-column>
@@ -23,9 +24,11 @@
                 <el-table-column prop="clickTimes" label="点击次数" width="100"></el-table-column>
                 <el-table-column prop="clickRate" label="点击率(%)" width="100"></el-table-column>
                 <el-table-column prop="avg" label="平均点击成本(元)" width=""></el-table-column>
-                <el-table-column fixed="right" label="操作" width="100" v-if="$store.state.user.user.name == 'admin'">
+                <el-table-column fixed="right" label="操作" width="150" v-if="$store.state.user.user.name == 'admin'">
                     <template slot-scope="scope">
-                        <el-button type="text" @click="edit_form_show(scope.row)" size="small">编辑</el-button>
+                        <div style="display:flex;">
+                            <el-button type="text" @click="edit_form_show(scope.row)" size="small">编辑</el-button>
+                        </div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -136,12 +139,23 @@
                 <el-button type="primary" @click="edit_submit">确 定</el-button>
             </div>
         </el-dialog>
+        <el-dialog title="收货地址" :visible.sync="dialogTableVisible"  width="500px">
+            <el-table :data="fileList" width="450">
+                <el-table-column property="companyName" label="公司名称" width="150"></el-table-column>
+                <el-table-column property="fileName" label="文件名称" width="200"></el-table-column>
+                <el-table-column fixed="right" label="" width="100">
+                    <template slot-scope="scope">
+                        <el-button type="text" @click="download(scope.row)" size="small">下载</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-dialog>
     </div>
 </template>
 <script>
     import moment from "moment";
     import {userList}  from '@/api/user';
-    import {updateBizData,bizDataList,addBizData,getReport} from '@/api/data_report'
+    import {updateBizData,bizDataList,addBizData,getReport,fileList} from '@/api/data_report'
     export default {
         data() {
             return {
@@ -166,7 +180,9 @@
                     xiaofei:""
                 },
                 dialogFormVisible:false,
-                dialogFormVisible_edit:false
+                dialogFormVisible_edit:false,
+                dialogTableVisible:false,
+                fileList:[]
             };
         },
         computed:{
@@ -187,7 +203,6 @@
                 
             },
             show_down:function(){
-                console.log(this.$store.state.user.user.showDown);
                 return this.$store.state.user.user.showDown==1;
             }
         },
@@ -216,6 +231,15 @@
                 }else {
                     window.open(`/statement/yt/export?endDate=${this.endDate}&startDate=${this.startDate}&userId=${this.$store.state.user.user.rowId}`);
                 }
+            },
+            openFilesDialog(){
+                this.fileList=[];
+                fileList({userId:this.$store.state.user.user.rowId}).then(res=>{
+                    if(res.status==1){
+                        this.fileList=res.data||[];
+                    }
+                })
+                this.dialogTableVisible=true;
             },
             pageChange:function(pageNum){
                 this.pageNum=pageNum;
@@ -271,6 +295,10 @@
                         this.getBizDataList();
                     }
                 });
+            },
+            download:function({fileName,userId}){
+                var url=`/statement/yt/downFile?userId=${userId}&fileName=${fileName}`;
+                window.open(url);
             }
         }
     }
