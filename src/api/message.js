@@ -21,3 +21,11 @@ export function getLastMsg(form) {
         params: form
     })
 }
+
+export function delMsg(form) {
+    return request({
+        url: '/statement/yt/delMsg',
+        method: 'GET',
+        params: form
+    })
+}

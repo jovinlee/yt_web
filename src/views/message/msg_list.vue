@@ -1,13 +1,19 @@
 <template>
     <div class="app-container">
         <div class="block">
-            <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据</el-button>
+            <el-button size="small" @click="add_form_show" v-show="this.$store.state.user.user.name == 'admin'">添加数据
+            </el-button>
         </div>
         <div class="table-container">
-            <el-table :data="list" border style="width: 90%;margin:0 auto;"  v-loading="listLoading">
-                <el-table-column prop="info" label="信息" width="450"></el-table-column>
-                <el-table-column prop="companyName" label="公司名称" width="450"></el-table-column>
-                <el-table-column prop="createDate" label="日期"> </el-table-column>
+            <el-table :data="list" border style="width: 90%;margin:0 auto;" v-loading="listLoading">
+                <el-table-column prop="info" label="信息" width=""></el-table-column>
+                <el-table-column prop="companyName" label="公司名称" width=""></el-table-column>
+                <el-table-column prop="createDate" label="日期"></el-table-column>
+                <el-table-column fixed="right" label="操作" width="" v-if="$store.state.user.user.name == 'admin'">
+                    <template slot-scope="scope">
+                        <el-button type="text" @click="del_msg(scope.row)" size="small">删除</el-button>
+                    </template>
+                </el-table-column>
             </el-table>
             <el-pagination
                     style="width: 810px;margin:0 auto;"
@@ -54,110 +60,137 @@
 </template>
 <script>
     import moment from "moment";
-    import {userList}  from '@/api/user';
-    import {addMessage,messageList,} from '@/api/message.js';
+    import {userList} from '@/api/user';
+    import {addMessage, messageList, delMsg} from '@/api/message.js';
     import {mapState} from "vuex";
+
     export default {
         data() {
             return {
-                data:{},
-                userList:[],
-                pageNum:1,
-                pageSize:10,
+                data: {},
+                userList: [],
+                pageNum: 1,
+                pageSize: 10,
                 listLoading: true,
-                date:[moment().day(-30).format('YYYY-MM-DD'),moment().format('YYYY-MM-DD')],
-                list:[],
-                reset:{},
-                form:{
-                    userId:"",
-                    info:"",
-                    createDate:""
+                date: [moment().day(-30).format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')],
+                list: [],
+                reset: {},
+                form: {
+                    rowId: "",
+                    userId: "",
+                    info: "",
+                    createDate: ""
                 },
-                edit_form:{},
-                dialogFormVisible:false,
-                dialogFormVisible_edit:false
+                edit_form: {},
+                dialogFormVisible: false,
+                dialogFormVisible_edit: false
             };
         },
-        computed:{
-            startDate:function(){
-                if(this.date){
-                    var d=this.date[0];
-                    var date=new Date(d);
+        computed: {
+            startDate: function () {
+                if (this.date) {
+                    var d = this.date[0];
+                    var date = new Date(d);
                     return moment(date).format("YYYY-MM-DD");
                 }
 
             },
-            endDate:function(){
-                if(this.date){
-                    var d=this.date[1];
-                    var date=new Date(d);
+            endDate: function () {
+                if (this.date) {
+                    var d = this.date[1];
+                    var date = new Date(d);
                     return moment(date).format("YYYY-MM-DD");
                 }
 
             }
         },
         created() {
-            userList(0,1000).then((res)=>{
-            if(res.status==1){
-                this.userList=res.data.records;
+            userList(0, 1000).then((res) => {
+                if(res.status == 1
+        )
+            {
+                this.userList = res.data.records;
             }
         })
             this.getMessageList()
         },
         methods: {
-            pageChange:function(pageNum){
-                this.pageNum=pageNum;
+            pageChange: function (pageNum) {
+                this.pageNum = pageNum;
                 this.getMessageList();
             },
-            getMessageList(){
+            getMessageList() {
                 this.listLoading = true;
-                let params={
-                    pageNum:this.pageNum,
-                    pageSize:this.pageSize,
-                    userId:this.$store.state.user.user.rowId
+                let params = {
+                    pageNum: this.pageNum,
+                    pageSize: this.pageSize,
+                    userId: this.$store.state.user.user.rowId
                 }
-                messageList(params).then((res)=>{
+                messageList(params).then((res) => {
                     this.listLoading = false;
-                    if(res.status==1){
-                        this.data=res.data;
-                        this.list=res.data.records;
-                    }
+                if (res.status == 1) {
+                    this.data = res.data;
+                    this.list = res.data.records;
+                }
             })
             },
-            add_form_show:function(){
-                this.dialogFormVisible=true;
+            add_form_show: function () {
+                this.dialogFormVisible = true;
             },
-            add_form_hide:function(){
-                this.form={};
-                this.dialogFormVisible=false;
+            add_form_hide: function () {
+                this.form = {};
+                this.dialogFormVisible = false;
             },
-            edit_form_show:function(item){
-                this.form=Object.assign({},item);
-                this.dialogFormVisible_edit=true;
+            edit_form_show: function (item) {
+                this.form = Object.assign({}, item);
+                this.dialogFormVisible_edit = true;
             },
-            edit_form_hide:function(){
-                this.form={};
-                this.dialogFormVisible_edit=false;
+            edit_form_hide: function () {
+                this.form = {};
+                this.dialogFormVisible_edit = false;
             },
-            add_submit:function(){
-                addMessage(this.form).then(res=>{
-                    if(res.status==1){
-                        this.form={};
-                        this.add_form_hide();
+            add_submit: function () {
+                addMessage(this.form).then(res => {
+                    if(res.status == 1
+            )
+                {
+                    this.form = {};
+                    this.add_form_hide();
+                    this.getMessageList();
+                }
+            })
+                ;
+            },
+            del_msg: function (item) {
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.form = Object.assign({}, item);
+                    delMsg(this.form).then(res => {
+                        this.form = {};
                         this.getMessageList();
-                    }
-                });
+                        this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                })
+
+                })
             }
         }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-    .title{
+    .title {
         display: flex;
-        width:800px;
-        padding:30px 0;
-    div{
-        width:200px;
+        width: 800px;
+        padding: 30px 0;
+
+    div {
+        width: 200px;
     }
+
     }
 </style>

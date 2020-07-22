@@ -17,10 +17,11 @@
                 <el-table-column prop="createDate" label="日期" width="150"></el-table-column>
                 <el-table-column prop="companyName" label="公司名称" width="150"></el-table-column>
                 <el-table-column prop="xiaofei" label="消费金额" width="100"></el-table-column>
-                <el-table-column prop="chujia" label="出价" width="100"></el-table-column>
+                <el-table-column prop="chujia" label="出价(元)" width="100"></el-table-column>
+                <el-table-column prop="md" label="模式" width="100"></el-table-column>
                 <el-table-column prop="showTimes" label="展示量" width="100"></el-table-column>
                 <el-table-column prop="clickTimes" label="点击次数" width="100"></el-table-column>
-                <el-table-column prop="clickRate" label="点击率" width="100"></el-table-column>
+                <el-table-column prop="clickRate" label="点击率(%)" width="100"></el-table-column>
                 <el-table-column prop="avg" label="平均点击成本(元)" width=""></el-table-column>
                 <el-table-column fixed="right" label="操作" width="100" v-if="$store.state.user.user.name == 'admin'">
                     <template slot-scope="scope">
@@ -66,6 +67,9 @@
                 <el-form-item label="出价" :label-width="'100px'">
                     <el-input v-model="form.chujia" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
+                <el-form-item label="模式CPC/CPM/OCPC/OCPM" :label-width="'100px'">
+                    <el-input v-model="form.md" autocomplete="off" :style="{width:'200px'}"></el-input>
+                </el-form-item>
                 <el-form-item label="展示量" :label-width="'100px'">
                     <el-input v-model="form.showTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
@@ -108,8 +112,11 @@
                 <el-form-item label="消费金额" :label-width="'100px'">
                     <el-input v-model="form.xiaofei" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="出价" :label-width="'100px'">
+                <el-form-item label="出价(元)" :label-width="'100px'">
                     <el-input v-model="form.chujia" autocomplete="off" :style="{width:'200px'}"></el-input>
+                </el-form-item>
+                <el-form-item label="模式CPC/CPM/OCPC/OCPM" :label-width="'100px'">
+                    <el-input v-model="form.md" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
                 <el-form-item label="展示量" :label-width="'100px'">
                     <el-input v-model="form.showTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
@@ -117,7 +124,7 @@
                 <el-form-item label="点击次数" :label-width="'100px'">
                     <el-input v-model="form.clickTimes" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
-                <el-form-item label="点击率" :label-width="'100px'">
+                <el-form-item label="点击率(%)" :label-width="'100px'">
                     <el-input v-model="form.clickRate" autocomplete="off" :style="{width:'200px'}"></el-input>
                 </el-form-item>
                 <el-form-item label="平均点击成本" :label-width="'100px'">
@@ -150,6 +157,7 @@
                     userId:"",
                     avg:"",
                     chujia:"",
+                    md:"",
                     clickRate:"",
                     clickTimes:"",
                     createDate:"",
@@ -250,8 +258,10 @@
                     if(res.status==1){
                         this.form={};
                         this.add_form_hide();
+                    this.getBizDataList();
                     }
                 });
+
             },
             edit_submit:function(){
                 updateBizData(this.form).then(res=>{
